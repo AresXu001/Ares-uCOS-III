@@ -1,0 +1,127 @@
+Dependencies for Project 'YH-uCOS-III', Target 'Target 1': (DO NOT MODIFY !)
+F (..\User\app.c)(0x5D2C170B)(--c99 -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\User -I ..\User\uC-CPU -I ..\User\uC-LIB -I ..\User\uCOS-III\Ports -I ..\User\uCOS-III\Source -I ..\User-I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="527" -D_RTE_ -DARMCM3-o .\objects\app.o --omf_browse .\objects\app.crf --depend .\objects\app.d)
+I (..\User\uCOS-III\Source\os.h)(0x5D2D1CFE)
+I (..\User\uCOS-III\Source\os_cfg.h)(0x5CF5D3F3)
+I (..\User\uC-CPU\cpu.h)(0x5D2C6089)
+I (..\User\uC-CPU\cpu_def.h)(0x5D2C3641)
+I (..\User\uCOS-III\Source\os_type.h)(0x5D2C39D9)
+I (..\User\uC-CPU\cpu_cfg.h)(0x5D2C34B0)
+I (..\User\uC-CPU\cpu_core.h)(0x5D2C26DB)
+I (..\User\uC-LIB\lib_def.h)(0x5D2C24DB)
+I (..\User\uCOS-III\Ports\os_cpu.h)(0x5D2C3399)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include\ARMCM3.h)(0x5BBD6B7A)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\core_cm3.h)(0x5C8F4DD4)
+I (D:\ProgramFiles\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_version.h)(0x5B971444)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_compiler.h)(0x5C8F4DD4)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_armcc.h)(0x5C8F4DD4)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\mpu_armv7.h)(0x5C8F4DD4)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include\system_ARMCM3.h)(0x5BBD6B7A)
+F (..\User\uCOS-III\Source\os.h)(0x5D2D1CFE)()
+F (..\User\uCOS-III\Source\os_cfg.h)(0x5CF5D3F3)()
+F (..\User\uCOS-III\Source\os_task.c)(0x5D2C1F81)(--c99 -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\User -I ..\User\uC-CPU -I ..\User\uC-LIB -I ..\User\uCOS-III\Ports -I ..\User\uCOS-III\Source -I ..\User-I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="527" -D_RTE_ -DARMCM3-o .\objects\os_task.o --omf_browse .\objects\os_task.crf --depend .\objects\os_task.d)
+I (..\User\uCOS-III\Source\os.h)(0x5D2D1CFE)
+I (..\User\uCOS-III\Source\os_cfg.h)(0x5CF5D3F3)
+I (..\User\uC-CPU\cpu.h)(0x5D2C6089)
+I (..\User\uC-CPU\cpu_def.h)(0x5D2C3641)
+I (..\User\uCOS-III\Source\os_type.h)(0x5D2C39D9)
+I (..\User\uC-CPU\cpu_cfg.h)(0x5D2C34B0)
+I (..\User\uC-CPU\cpu_core.h)(0x5D2C26DB)
+I (..\User\uC-LIB\lib_def.h)(0x5D2C24DB)
+I (..\User\uCOS-III\Ports\os_cpu.h)(0x5D2C3399)
+F (..\User\uCOS-III\Source\os_var.c)(0x5D2D1CF3)(--c99 -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\User -I ..\User\uC-CPU -I ..\User\uC-LIB -I ..\User\uCOS-III\Ports -I ..\User\uCOS-III\Source -I ..\User-I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="527" -D_RTE_ -DARMCM3-o .\objects\os_var.o --omf_browse .\objects\os_var.crf --depend .\objects\os_var.d)
+I (..\User\uCOS-III\Source\os.h)(0x5D2D1CFE)
+I (..\User\uCOS-III\Source\os_cfg.h)(0x5CF5D3F3)
+I (..\User\uC-CPU\cpu.h)(0x5D2C6089)
+I (..\User\uC-CPU\cpu_def.h)(0x5D2C3641)
+I (..\User\uCOS-III\Source\os_type.h)(0x5D2C39D9)
+I (..\User\uC-CPU\cpu_cfg.h)(0x5D2C34B0)
+I (..\User\uC-CPU\cpu_core.h)(0x5D2C26DB)
+I (..\User\uC-LIB\lib_def.h)(0x5D2C24DB)
+I (..\User\uCOS-III\Ports\os_cpu.h)(0x5D2C3399)
+F (..\User\uCOS-III\Source\os_core.c)(0x5D2BCF91)(--c99 -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\User -I ..\User\uC-CPU -I ..\User\uC-LIB -I ..\User\uCOS-III\Ports -I ..\User\uCOS-III\Source -I ..\User-I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="527" -D_RTE_ -DARMCM3-o .\objects\os_core.o --omf_browse .\objects\os_core.crf --depend .\objects\os_core.d)
+I (..\User\uCOS-III\Source\os.h)(0x5D2D1CFE)
+I (..\User\uCOS-III\Source\os_cfg.h)(0x5CF5D3F3)
+I (..\User\uC-CPU\cpu.h)(0x5D2C6089)
+I (..\User\uC-CPU\cpu_def.h)(0x5D2C3641)
+I (..\User\uCOS-III\Source\os_type.h)(0x5D2C39D9)
+I (..\User\uC-CPU\cpu_cfg.h)(0x5D2C34B0)
+I (..\User\uC-CPU\cpu_core.h)(0x5D2C26DB)
+I (..\User\uC-LIB\lib_def.h)(0x5D2C24DB)
+I (..\User\uCOS-III\Ports\os_cpu.h)(0x5D2C3399)
+F (..\User\uCOS-III\Source\os_type.h)(0x5D2C39D9)()
+F (..\User\uCOS-III\Source\os_time.c)(0x5D2D1D18)(--c99 -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\User -I ..\User\uC-CPU -I ..\User\uC-LIB -I ..\User\uCOS-III\Ports -I ..\User\uCOS-III\Source -I ..\User-I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="527" -D_RTE_ -DARMCM3-o .\objects\os_time.o --omf_browse .\objects\os_time.crf --depend .\objects\os_time.d)
+I (..\User\uCOS-III\Source\os.h)(0x5D2D1CFE)
+I (..\User\uCOS-III\Source\os_cfg.h)(0x5CF5D3F3)
+I (..\User\uC-CPU\cpu.h)(0x5D2C6089)
+I (..\User\uC-CPU\cpu_def.h)(0x5D2C3641)
+I (..\User\uCOS-III\Source\os_type.h)(0x5D2C39D9)
+I (..\User\uC-CPU\cpu_cfg.h)(0x5D2C34B0)
+I (..\User\uC-CPU\cpu_core.h)(0x5D2C26DB)
+I (..\User\uC-LIB\lib_def.h)(0x5D2C24DB)
+I (..\User\uCOS-III\Ports\os_cpu.h)(0x5D2C3399)
+F (..\User\uCOS-III\Source\os_cfg_app.c)(0x5D244FFF)(--c99 -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\User -I ..\User\uC-CPU -I ..\User\uC-LIB -I ..\User\uCOS-III\Ports -I ..\User\uCOS-III\Source -I ..\User-I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="527" -D_RTE_ -DARMCM3-o .\objects\os_cfg_app.o --omf_browse .\objects\os_cfg_app.crf --depend .\objects\os_cfg_app.d)
+I (..\User\uCOS-III\Source\os_cfg_app.h)(0x5D244D9A)
+I (..\User\uCOS-III\Source\os.h)(0x5D2D1CFE)
+I (..\User\uCOS-III\Source\os_cfg.h)(0x5CF5D3F3)
+I (..\User\uC-CPU\cpu.h)(0x5D2C6089)
+I (..\User\uC-CPU\cpu_def.h)(0x5D2C3641)
+I (..\User\uCOS-III\Source\os_type.h)(0x5D2C39D9)
+I (..\User\uC-CPU\cpu_cfg.h)(0x5D2C34B0)
+I (..\User\uC-CPU\cpu_core.h)(0x5D2C26DB)
+I (..\User\uC-LIB\lib_def.h)(0x5D2C24DB)
+I (..\User\uCOS-III\Ports\os_cpu.h)(0x5D2C3399)
+F (..\User\uCOS-III\Source\os_prio.c)(0x5D2D1D18)(--c99 -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\User -I ..\User\uC-CPU -I ..\User\uC-LIB -I ..\User\uCOS-III\Ports -I ..\User\uCOS-III\Source -I ..\User-I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="527" -D_RTE_ -DARMCM3-o .\objects\os_prio.o --omf_browse .\objects\os_prio.crf --depend .\objects\os_prio.d)
+I (..\User\uCOS-III\Source\os.h)(0x5D2D1CFE)
+I (..\User\uCOS-III\Source\os_cfg.h)(0x5CF5D3F3)
+I (..\User\uC-CPU\cpu.h)(0x5D2C6089)
+I (..\User\uC-CPU\cpu_def.h)(0x5D2C3641)
+I (..\User\uCOS-III\Source\os_type.h)(0x5D2C39D9)
+I (..\User\uC-CPU\cpu_cfg.h)(0x5D2C34B0)
+I (..\User\uC-CPU\cpu_core.h)(0x5D2C26DB)
+I (..\User\uC-LIB\lib_def.h)(0x5D2C24DB)
+I (..\User\uCOS-III\Ports\os_cpu.h)(0x5D2C3399)
+F (..\User\uCOS-III\Ports\os_cpu_a.s)(0x5D2445A1)(--cpu Cortex-M3 --li -g --apcs=interwork -I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include--pd "__UVISION_VERSION SETA 527" --pd "_RTE_ SETA 1" --pd "ARMCM3 SETA 1"--list .\listings\os_cpu_a.lst --xref -o .\objects\os_cpu_a.o --depend .\objects\os_cpu_a.d)
+F (..\User\uCOS-III\Ports\os_cpu.h)(0x5D2C3399)()
+F (..\User\uC-CPU\cpu.h)(0x5D2C6089)()
+F (..\User\uC-CPU\os_cpu_c.c)(0x5D248342)(--c99 -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\User -I ..\User\uC-CPU -I ..\User\uC-LIB -I ..\User\uCOS-III\Ports -I ..\User\uCOS-III\Source -I ..\User-I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="527" -D_RTE_ -DARMCM3-o .\objects\os_cpu_c.o --omf_browse .\objects\os_cpu_c.crf --depend .\objects\os_cpu_c.d)
+I (..\User\uC-CPU\cpu.h)(0x5D2C6089)
+I (..\User\uC-CPU\cpu_def.h)(0x5D2C3641)
+I (..\User\uCOS-III\Source\os.h)(0x5D2D1CFE)
+I (..\User\uCOS-III\Source\os_cfg.h)(0x5CF5D3F3)
+I (..\User\uCOS-III\Source\os_type.h)(0x5D2C39D9)
+I (..\User\uC-CPU\cpu_cfg.h)(0x5D2C34B0)
+I (..\User\uC-CPU\cpu_core.h)(0x5D2C26DB)
+I (..\User\uC-LIB\lib_def.h)(0x5D2C24DB)
+I (..\User\uCOS-III\Ports\os_cpu.h)(0x5D2C3399)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include\ARMCM3.h)(0x5BBD6B7A)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\core_cm3.h)(0x5C8F4DD4)
+I (D:\ProgramFiles\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_version.h)(0x5B971444)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_compiler.h)(0x5C8F4DD4)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_armcc.h)(0x5C8F4DD4)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\mpu_armv7.h)(0x5C8F4DD4)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include\system_ARMCM3.h)(0x5BBD6B7A)
+F (..\User\uC-CPU\cpu_a.asm)(0x5D2C587A)(--cpu Cortex-M3 --li -g --apcs=interwork -I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include--pd "__UVISION_VERSION SETA 527" --pd "_RTE_ SETA 1" --pd "ARMCM3 SETA 1"--list .\listings\cpu_a.lst --xref -o .\objects\cpu_a.o --depend .\objects\cpu_a.d)
+F (..\User\uC-CPU\cpu_core.h)(0x5D2C26DB)()
+F (..\User\uC-CPU\cpu_core.c)(0x5D2D1CD3)(--c99 -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\User -I ..\User\uC-CPU -I ..\User\uC-LIB -I ..\User\uCOS-III\Ports -I ..\User\uCOS-III\Source -I ..\User-I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="527" -D_RTE_ -DARMCM3-o .\objects\cpu_core.o --omf_browse .\objects\cpu_core.crf --depend .\objects\cpu_core.d)
+I (..\User\uC-CPU\cpu_core.h)(0x5D2C26DB)
+I (..\User\uC-CPU\cpu.h)(0x5D2C6089)
+I (..\User\uC-CPU\cpu_def.h)(0x5D2C3641)
+I (..\User\uC-CPU\cpu_cfg.h)(0x5D2C34B0)
+I (..\User\uCOS-III\Ports\os_cpu.h)(0x5D2C3399)
+I (..\User\uC-LIB\lib_def.h)(0x5D2C24DB)
+F (..\User\uC-CPU\cpu_cfg.h)(0x5D2C34B0)()
+F (..\User\uC-CPU\cpu_def.h)(0x5D2C3641)()
+F (..\User\uC-LIB\lib_def.h)(0x5D2C24DB)()
+F (..\Doc\readm.txt)(0x5D2BF51D)()
+F (RTE\Device\ARMCM3\startup_ARMCM3.s)(0x50B2CC4C)(--cpu Cortex-M3 --li -g --apcs=interwork -I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include--pd "__UVISION_VERSION SETA 527" --pd "_RTE_ SETA 1" --pd "ARMCM3 SETA 1"--list .\listings\startup_armcm3.lst --xref -o .\objects\startup_armcm3.o --depend .\objects\startup_armcm3.d)
+F (RTE\Device\ARMCM3\system_ARMCM3.c)(0x53FEF2AA)(--c99 -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\User -I ..\User\uC-CPU -I ..\User\uC-LIB -I ..\User\uCOS-III\Ports -I ..\User\uCOS-III\Source -I ..\User-I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="527" -D_RTE_ -DARMCM3-o .\objects\system_armcm3.o --omf_browse .\objects\system_armcm3.crf --depend .\objects\system_armcm3.d)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include\ARMCM3.h)(0x5BBD6B7A)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\core_cm3.h)(0x5C8F4DD4)
+I (D:\ProgramFiles\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_version.h)(0x5B971444)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_compiler.h)(0x5C8F4DD4)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_armcc.h)(0x5C8F4DD4)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\mpu_armv7.h)(0x5C8F4DD4)
+I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include\system_ARMCM3.h)(0x5BBD6B7A)

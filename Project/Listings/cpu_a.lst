@@ -1,0 +1,208 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         ;*******************************************************
+                       *************************************************
+    3 00000000         ;                       PUBLIC FUNCTIONS即声明为外部可调
+                       用
+    4 00000000         ;*******************************************************
+                       *************************************************
+    5 00000000         
+    6 00000000                 EXPORT           CPU_IntDis
+    7 00000000                 EXPORT           CPU_IntEn
+    8 00000000                 EXPORT           CPU_CntLeadZeros
+    9 00000000                 EXPORT           CPU_CntTrialZeros
+   10 00000000         
+   11 00000000         
+   12 00000000         
+   13 00000000         ;*******************************************************
+                       *************************************************
+   14 00000000         ;                                      代码产生指令
+   15 00000000         ;*******************************************************
+                       *************************************************
+   16 00000000         
+   17 00000000                 AREA             |.text|, CODE, READONLY, ALIGN=
+2
+   18 00000000                 THUMB
+   19 00000000                 REQUIRE8
+   20 00000000                 PRESERVE8
+   21 00000000         
+   22 00000000         
+   23 00000000         ;*******************************************************
+                       *************************************************
+   24 00000000         ;                                    失能 and 使能 中断
+   25 00000000         ;
+   26 00000000         ; Description : Disable/Enable interrupts.
+   27 00000000         ;
+   28 00000000         ; Prototypes  : void  CPU_IntDis(void);
+   29 00000000         ;               void  CPU_IntEn (void);
+   30 00000000         ;*******************************************************
+                       *************************************************
+   31 00000000         
+   32 00000000         CPU_IntDis
+   33 00000000 B672            CPSID            I
+   34 00000002 4770            BX               LR
+   35 00000004         
+   36 00000004         
+   37 00000004         CPU_IntEn
+   38 00000004 B662            CPSIE            I
+   39 00000006 4770            BX               LR
+   40 00000008         
+   41 00000008         
+   42 00000008         
+   43 00000008         ;*******************************************************
+                       *************************************************
+   44 00000008         ;                                      CRITICAL SECTION 
+                       FUNCTIONS
+   45 00000008         ;
+   46 00000008         ; Description : Disable/Enable interrupts by preserving 
+                       the state of interrupts.  Generally speaking, the
+   47 00000008         ;               state of the interrupt disable flag is s
+                       tored in the local variable 'cpu_sr' & interrupts
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   48 00000008         ;               are then disabled ('cpu_sr' is allocated
+                        in all functions that need to disable interrupts).
+   49 00000008         ;               The previous interrupt state is restored
+                        by copying 'cpu_sr' into the CPU's status register.
+   50 00000008         ;
+   51 00000008         ; Prototypes  : CPU_SR  CPU_SR_Save   (void);
+   52 00000008         ;               void    CPU_SR_Restore(CPU_SR  cpu_sr);
+   53 00000008         ;
+   54 00000008         ; Note(s)     : (1) These functions are used in general 
+                       like this :
+   55 00000008         ;
+   56 00000008         ;                       void  Task (void  *p_arg)
+   57 00000008         ;                       {
+   58 00000008         ;                           CPU_SR_ALLOC();             
+                               /* Allocate storage for CPU status register */
+   59 00000008         ;                               :
+   60 00000008         ;                               :
+   61 00000008         ;                           CPU_CRITICAL_ENTER();       
+                               /* cpu_sr = CPU_SR_Save();                  */
+   62 00000008         ;                               :
+   63 00000008         ;                               :
+   64 00000008         ;                           CPU_CRITICAL_EXIT();        
+                               /* CPU_SR_Restore(cpu_sr);                  */
+   65 00000008         ;                               :
+   66 00000008         ;                       }
+   67 00000008         ;*******************************************************
+                       *************************************************
+   68 00000008         CPU_SR_Save                          ;进入临界区
+   69 00000008 F3EF 8010       MRS              R0,PRIMASK
+   70 0000000C B672            CPSID            I
+   71 0000000E 4770            BX               LR
+   72 00000010         
+   73 00000010         CPU_SR_Restore                       ;退出临界区
+   74 00000010 F380 8810       MSR              PRIMASK, R0
+   75 00000014 4770            BX               LR
+   76 00000016         
+   77 00000016         ;*******************************************************
+                       ***********************
+   78 00000016         ;*  
+   79 00000016         ;*                   计算前导零
+   80 00000016         ;*                 函数声明：CPU_DATA CPU_CntLeadZeros(C
+                       PU_DATA val)
+   81 00000016         ;*******************************************************
+                       ************************
+   82 00000016         CPU_CntLeadZeros
+   83 00000016 FAB0 F080       CLZ              R0,R0
+   84 0000001A 4770            BX               LR
+   85 0000001C         
+   86 0000001C         ;*******************************************************
+                       *****************************
+   87 0000001C         ;*                               计算后导零
+   88 0000001C         ;*                     函数声明：函数声明：CPU_DATA CPU_
+                       CntTrialZeros(CPU_DATA val)
+   89 0000001C         ;*******************************************************
+                       *****************************
+   90 0000001C         CPU_CntTrialZeros
+   91 0000001C FA90 F0A0       RBIT             R0,R0
+   92 00000020 FAB0 F080       CLZ              R0,R0
+   93 00000024 4770            BX               LR
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+   94 00000026         
+   95 00000026                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\cpu_a.d -o.\objects\cpu_a.o -I.\RTE\_Target_1 -ID:\Progr
+amFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include -ID:\ProgramFiles\K
+eil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include --predefine="__UVISIO
+N_VERSION SETA 527" --predefine="_RTE_ SETA 1" --predefine="ARMCM3 SETA 1" --li
+st=.\listings\cpu_a.lst ..\User\uC-CPU\cpu_a.asm
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 17 in file ..\User\uC-CPU\cpu_a.asm
+   Uses
+      None
+Comment: .text unused
+CPU_CntLeadZeros 00000016
+
+Symbol: CPU_CntLeadZeros
+   Definitions
+      At line 82 in file ..\User\uC-CPU\cpu_a.asm
+   Uses
+      At line 8 in file ..\User\uC-CPU\cpu_a.asm
+Comment: CPU_CntLeadZeros used once
+CPU_CntTrialZeros 0000001C
+
+Symbol: CPU_CntTrialZeros
+   Definitions
+      At line 90 in file ..\User\uC-CPU\cpu_a.asm
+   Uses
+      At line 9 in file ..\User\uC-CPU\cpu_a.asm
+Comment: CPU_CntTrialZeros used once
+CPU_IntDis 00000000
+
+Symbol: CPU_IntDis
+   Definitions
+      At line 32 in file ..\User\uC-CPU\cpu_a.asm
+   Uses
+      At line 6 in file ..\User\uC-CPU\cpu_a.asm
+Comment: CPU_IntDis used once
+CPU_IntEn 00000004
+
+Symbol: CPU_IntEn
+   Definitions
+      At line 37 in file ..\User\uC-CPU\cpu_a.asm
+   Uses
+      At line 7 in file ..\User\uC-CPU\cpu_a.asm
+Comment: CPU_IntEn used once
+CPU_SR_Restore 00000010
+
+Symbol: CPU_SR_Restore
+   Definitions
+      At line 73 in file ..\User\uC-CPU\cpu_a.asm
+   Uses
+      None
+Comment: CPU_SR_Restore unused
+CPU_SR_Save 00000008
+
+Symbol: CPU_SR_Save
+   Definitions
+      At line 68 in file ..\User\uC-CPU\cpu_a.asm
+   Uses
+      None
+Comment: CPU_SR_Save unused
+7 symbols
+340 symbols in table
