@@ -7,6 +7,8 @@
         EXPORT  CPU_IntEn
 		EXPORT  CPU_CntLeadZeros
 		EXPORT  CPU_CntTrialZeros
+		EXPORT 	CPU_SR_Save
+		EXPORT  CPU_SR_Restore
 
 
 

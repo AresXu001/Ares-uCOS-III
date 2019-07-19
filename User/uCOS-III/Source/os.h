@@ -7,6 +7,21 @@
 #include <cpu_cfg.h>
 #include <cpu_def.h>
 
+/*
+************************************************************************************************************************
+*                                                 ¡ŸΩÁ∂Œ¥¶¿Ì
+************************************************************************************************************************
+*/
+
+#define  OS_CRITICAL_ENTER()                    CPU_CRITICAL_ENTER()
+
+#define  OS_CRITICAL_ENTER_CPU_CRITICAL_EXIT()
+
+#define  OS_CRITICAL_EXIT()                     CPU_CRITICAL_EXIT()
+
+#define  OS_CRITICAL_EXIT_NO_SCHED()            CPU_CRITICAL_EXIT()
+
+
 #ifdef     OS_GLOBALS 
 	#define    OS_EXT 
 #else 
@@ -18,6 +33,8 @@ extern  CPU_DATA    OSPrioTbl[OS_PRIO_TBL_SIZE];
 	
 #define  OS_STATE_OS_STOPPED                    (OS_STATE)(0u) 
 #define  OS_STATE_OS_RUNNING                    (OS_STATE)(1u) 
+	
+#define  OS_PRIO_INIT                       (OS_PRIO)(OS_CFG_PRIO_MAX)
 	
 typedef  struct  os_tcb          OS_TCB; 
 typedef  struct  os_rdy_list     OS_RDY_LIST;

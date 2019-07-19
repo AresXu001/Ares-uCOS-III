@@ -9,6 +9,8 @@ NVIC_PENDSVSET  EQU     0x10000000    ; 触发 PendSV 异常的值 Bit28：PENDSVSET
 	
 	IMPORT  OSTCBCurPtr                                         ; 外部文件引人的参考
     IMPORT  OSTCBHighRdyPtr
+	IMPORT  OSPrioHighRdy
+	IMPORT  OSPrioCur
 		
     EXPORT  OSStartHighRdy                                      ; 该文件定义的函数
 	EXPORT  PendSV_Handler
@@ -54,6 +56,12 @@ PendSV_Handler PROC
 
 ; 任务的切换，即把下一个要运行的任务的堆栈内容加载到CPU寄存器中
 OS_CPU_PendSVHandler_nosave  
+	;OSPrioCur = OSPrioHighRdy  第一次切换找到任务最高优先级
+	LDR  R0 ,= OSPrioCur
+	LDR  R1 ,= OSPrioHighRdy
+	LDRB R2 , [R1]
+	STRB R2 , [R0]
+	
 	; OSTCBCurPtr = OSTCBHighRdyPtr;
 	LDR     R0, = OSTCBCurPtr                 ; 加载 OSTCBCurPtr 指针的地址到R0，这里LDR属于伪指令
 	LDR     R1, = OSTCBHighRdyPtr             ; 加载 OSTCBHighRdyPtr 指针的地址到R1，这里LDR属于伪指令

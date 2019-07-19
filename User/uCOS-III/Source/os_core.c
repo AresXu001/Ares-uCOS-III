@@ -1,7 +1,7 @@
 #include "os.h"
 #include "os_cpu.h"
 
-
+#if 0
 void OS_RdyListInit(void) 
 { 
 	OS_PRIO i; 
@@ -14,16 +14,26 @@ void OS_RdyListInit(void)
 		 p_rdy_list->TailPtr  = (OS_TCB *)0; 
 	} 
 } 
+#endif
 
 void OS_IdleTaskInit(OS_ERR *p_err);
+void OS_RdyListInit(void);
 void OSInit (OS_ERR *p_err) 
 { 
 		OSRunning       =  OS_STATE_OS_STOPPED;              
 
+	/* 初始化两个全局的TCB,用于任务切换 */
 		OSTCBCurPtr     = (OS_TCB *)0;                     
-		OSTCBHighRdyPtr = (OS_TCB *)0;     
+		OSTCBHighRdyPtr = (OS_TCB *)0;  
+	
+  /* 初始化优先级变量 */
+		OSPrioCur    = (OS_PRIO)0;
+		OSPrioHighRdy = (OS_PRIO)0;
+		
+		/* 初始化就绪列表 */
 		OS_RdyListInit();  
 	
+		/* 初始化空闲任务 */
 		OS_IdleTaskInit(p_err);   //初始化空闲任务
 		
 		if(*p_err != OS_ERR_NONE)
@@ -37,9 +47,22 @@ void OSStart(OS_ERR*p_err)
 {
 	if(OSRunning == OS_STATE_OS_STOPPED)
 	{
+#if 0   /* 手动配置任务1先运行 */      
 		OSTCBHighRdyPtr = OSRdyList[0].HeadPtr;
+#endif
 		
-		OSStartHighRdy();  /* 启动任务切换 */
+		/* 寻找最高优先级 */
+		OSPrioHighRdy = OS_PrioGetHighest();
+		OSPrioCur     = OSPrioHighRdy;
+		
+		/* 找到最高优先级任务的TCB */
+		OSTCBHighRdyPtr = OSRdyList[OSPrioHighRdy].HeadPtr;
+		OSTCBCurPtr     = OSTCBHighRdyPtr;
+		
+		/* 标志系统运行 */
+		OSRunning = OS_STATE_OS_RUNNING;  
+		
+		OSStartHighRdy();  /* 启动任务切换 不会再返回 */
 		
 		*p_err = OS_ERR_FATAL_RETURN;
 	}
@@ -62,6 +85,8 @@ void OSSched (void)
 		OSTCBHighRdyPtr = OSRdyList[0].HeadPtr;
 	}
 #endif
+
+#if 0
 	/* 如果当前任务是空闲任务 */
 	if(OSTCBCurPtr == &OSIdleTaskTCB)
 	{
@@ -111,9 +136,26 @@ void OSSched (void)
 			}
 		}
 	}
+	OS_TASK_SW();  //任务切换
+#endif
 	
+	CPU_SR_ALLOC();
+	OS_CRITICAL_ENTER();  /* 进入临界区 */
 	
-	OS_TASK_SW();
+	OSPrioHighRdy   = OS_PrioGetHighest();
+	OSTCBHighRdyPtr = OSRdyList[OSPrioHighRdy].HeadPtr;
+	
+	/* 如果最高优先级任务是当前任务 直接返回，不进行任务切换 */
+	if(OSTCBHighRdyPtr == OSTCBCurPtr)
+	{ /*退出临界区*/
+		OS_CRITICAL_EXIT();
+		return;
+	}
+	
+	/*退出临界区*/
+	OS_CRITICAL_EXIT();
+	
+	OS_TASK_SW();  /* 任务切换 即触发PendSV异常 */
 }
 
 //char flag5 = 0;
@@ -132,17 +174,19 @@ void OS_IdleTask(void *p_arg)
 	}
 }
 
+/* 空闲任务初始化 */
 void OS_IdleTaskInit(OS_ERR *p_err)
 {
 	/* 初始化空闲任务计数器 */
 	OSIdleTaskCtr = (OS_IDLE_CTR)0;
 	
-	OSTaskCreate ((OS_TCB*)      &OSIdleTaskTCB, 
-	              (OS_TASK_PTR ) OS_IdleTask, 
-	              (void *)       0,
-	              (CPU_STK*)     OSCfg_IdleTaskStkBasePtr,
-	              (CPU_STK_SIZE) OSCfg_IdleTaskStkSize,
-	              (OS_ERR *)     p_err);
+	OSTaskCreate ((OS_TCB      *)  &OSIdleTaskTCB, 
+	              (OS_TASK_PTR  )  OS_IdleTask, 
+	              (void        *)  0,
+								(OS_PRIO      )  (OS_CFG_PRIO_MAX - 1u), //加上优先级参数初始化
+	              (CPU_STK     *)  OSCfg_IdleTaskStkBasePtr,
+	              (CPU_STK_SIZE )  OSCfg_IdleTaskStkSize,
+	              (OS_ERR      *)  p_err);
 }
 
 /* 初始化任务就绪列表 */
@@ -154,7 +198,7 @@ void OS_RdyListInit(void)
 	for(i = 0u;i < OS_CFG_PRIO_MAX;i++)
 	{
 		p_rdy_list = &OSRdyList[i];
-		p_rdy_list->NbrEnries = (OS)OBJ_QTY)0;\
+		p_rdy_list->NbrEnries = (OS_OBJ_QTY)0;
 		p_rdy_list->HeadPtr   = (OS_TCB *)0;
 		p_rdy_list->TailPtr   = (OS_TCB *)0;
 	}
@@ -199,7 +243,7 @@ void OS_RdyListInsertTail(OS_TCB *p_tcb)
 	p_rdy_list = &OSRdyList[p_tcb->prio];
 	if(p_rdy_list->NbrEnries == (OS_OBJ_QTY)0)
 	{
-		p_rdy_list->NbrEnries = ((OS_OBJ_QTY))1;
+		p_rdy_list->NbrEnries = (OS_OBJ_QTY)1;
 		p_tcb->NextPtr = (OS_TCB *)0;
 		p_tcb->PrevPtr = (OS_TCB *)0;
 		p_rdy_list->HeadPtr = p_tcb;

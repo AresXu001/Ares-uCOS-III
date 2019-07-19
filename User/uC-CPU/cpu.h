@@ -90,8 +90,8 @@ CPU_DATA    CPU_CntLeadZeros (CPU_DATA  val); /* 计算前导零 */
 CPU_DATA    CPU_CntTrailZeros(CPU_DATA  val); /* 计算后导零 */
 
 /* 在cpu_a.asm定义 */
-CPU_SR      CPU_SR_Save      (void);
-void        CPU_SR_Restore   (CPU_SR  cpu_sr);
+CPU_SR  CPU_SR_Save(void);
+void    CPU_SR_Restore(CPU_SR  cpu_sr);
 
 #endif /* CPU_H */ 
 

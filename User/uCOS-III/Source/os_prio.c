@@ -31,10 +31,12 @@ void OS_PrioInsert(OS_PRIO prio)
 	/*求余操作，将优先级限制在  DEF_INT_CPU_NBR_BITS 之内*/
 	bit_nbr = (CPU_DATA)prio & (DEF_INT_CPU_NBR_BITS);
 	
+	 /* 获取优先级在优先级表中对应的位的位置 */ 
 	bit = 1u;
 	bit <<= (DEF_INT_CPU_NBR_BITS - 1u) - bit_nbr;
 	
-	OSPrioTbl[ix] = bit;
+	 /* 将优先级在优先级表中对应的位置 1 */ 
+	OSPrioTbl[ix] |= bit;
 }
 
 /*
@@ -51,10 +53,12 @@ void OS_PrioRemove(OS_PRIO prio)
 	/*求余操作，将优先级限制在  DEF_INT_CPU_NBR_BITS 之内*/
 	bit_nbr = (CPU_DATA)prio & (DEF_INT_CPU_NBR_BITS);
 	
+	/* 获取优先级在优先级表中对应的位的位置 */ 
 	bit = 1u;
 	bit <<= (DEF_INT_CPU_NBR_BITS - 1u) - bit_nbr;
-	
-	OSPrioTbl[ix] = bit;
+	 
+	/* 将优先级在优先级表中对应的位清 0 */ 
+	OSPrioTbl[ix] &= ~bit;
 }
 
 /* 函数用于从优先级表中查找最高的优先级 */
