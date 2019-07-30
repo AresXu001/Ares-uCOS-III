@@ -9,7 +9,7 @@
 
 #define  DEF_NULL                                 ((void *)0)
 
-
+/* 好的 我知道了 */
 /* ----------------- 布尔定义 ------------------ */
 #define  DEF_FALSE                                         0u
 #define  DEF_TRUE                                          1u

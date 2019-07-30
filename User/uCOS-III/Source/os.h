@@ -39,6 +39,17 @@ extern  CPU_DATA    OSPrioTbl[OS_PRIO_TBL_SIZE];
 typedef  struct  os_tcb          OS_TCB; 
 typedef  struct  os_rdy_list     OS_RDY_LIST;
 typedef  void (*OS_TASK_PTR)(void *p_arg); 
+
+typedef struct  os_tick_spoke  OS_TICK_SPOKE;  	
+	/* 时基列表相关结构体 */
+struct os_tick_spoke
+{
+	OS_TCB *FirstPtr;
+	OS_OBJ_QTY   NbrEntries;
+	OS_OBJ_QTY   NbrEntriesMax;
+};
+
+
 	
  /* 任务控制块 数据类型声明 */ 
 struct os_tcb 
@@ -59,10 +70,20 @@ struct os_tcb
 	
 	 /* 就绪列表双向链表前项指针 */
 		OS_TCB    *PrevPtr;
+		
+	/* 时基列表相关字段 */
+	OS_TCB         *TickNextPtr;   //指向链表的下一个TCB节点
+	OS_TCB         *TickPrevPtr;   //指向链表的上一个TCB节点
+	OS_TICK_SPOKE  *TickSpokePtr;
+	
+	OS_TICK       TickCtrMatch;   
+	OS_TICK       TickRemain;      //设置任务等待周期
 };
 
 OS_EXT  OS_PRIO  OSPrioCur;       /* 当前运行任务优先级 */
 OS_EXT  OS_PRIO  OSPrioHighRdy;   /* 就绪任务中的最高优先级 */ 
+
+
 
 struct os_rdy_list 
 {                                   
@@ -286,22 +307,36 @@ OS_EXT    OS_TCB         *OSTCBHighRdyPtr;          //就绪最高优先级任务
 OS_EXT    OS_RDY_LIST    OSRdyList[OS_CFG_PRIO_MAX]; 
 OS_EXT    OS_STATE       OSRunning; 
 
+/* 时基列表 声明 */
+extern OS_TICK_SPOKE   OSCfg_TickWheel[];
+extern OS_OBJ_QTY  const OSCfg_TickWheelSize;
 
 extern CPU_STK        *const OSCfg_IdleTaskStkBasePtr;   //空闲任务堆栈
 extern CPU_STK_SIZE    const OSCfg_IdleTaskStkSize;      //空闲任务堆栈大小
 OS_EXT  OS_TCB         OSIdleTaskTCB;     //空闲任务控制块
 OS_EXT  OS_IDLE_CTR    OSIdleTaskCtr;    //空闲任务计数变量
+OS_EXT  OS_TICK        OSTickCtr;       //时基计数器
 
 extern CPU_STK *OSTaskStkInit (OS_TASK_PTR  p_task,                   
-															 void         *p_arg,                  
-															 CPU_STK      *p_stk_base,               
+										 void         *p_arg,                  
+										 CPU_STK      *p_stk_base,               
                                CPU_STK_SIZE stk_size);
-															 void OSInit(OS_ERR *p_err);
+										 
+void  OS_TaskRdy(OS_TCB  *p_tcb);	
+										 
+void OSInit(OS_ERR *p_err);
 															 
 extern void OSTimeDly(OS_TICK dly);		//延时函数	
 															 
 extern void OSStart (OS_ERR *p_err);				   
 extern void OSSched (void);
+										 
+										 
+/* 时基列表相关函数声明 */										 
+void  OS_TickListInit(void);
+void  OS_TickListInsert(OS_TCB *p_tcb,OS_TICK time);
+void  OS_TickListRemove(OS_TCB  *p_tcb);
+void  OS_TickListUpdate(void);
 
 
 #endif	

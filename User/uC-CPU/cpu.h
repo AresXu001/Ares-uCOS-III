@@ -20,6 +20,7 @@ typedef  unsigned  int         CPU_INT32U;
 typedef  unsigned  char        CPU_INT08U; 
 typedef  volatile  CPU_INT32U  CPU_REG32; 
 typedef  CPU_INT32U            CPU_DATA;
+typedef  unsigned  char        CPU_BOOLEAN;
 
  
 /*
