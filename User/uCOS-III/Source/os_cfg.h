@@ -4,6 +4,8 @@
 /* 支持最大的优先级 */ 
 #define OS_CFG_PRIO_MAX                32u 
 #define OS_CFG_SCHED_ROUND_ROBIN_EN    1u
+#define OS_CFG_TASK_SUSPEND_EN         1u
+#define OS_CFG_TASK_DEL_EN             1u
 
 #endif
 

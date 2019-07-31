@@ -36,6 +36,31 @@ extern  CPU_DATA    OSPrioTbl[OS_PRIO_TBL_SIZE];
 	
 #define  OS_PRIO_INIT                       (OS_PRIO)(OS_CFG_PRIO_MAX)
 	
+/*
+========================================================================================================================
+*                                                      任务的状态
+========================================================================================================================
+*/
+                                                                /* ------------------- TASK STATES ------------------ */
+#define  OS_TASK_STATE_BIT_DLY               (OS_STATE)(0x01u)  /*   /-------- SUSPENDED bit                          */
+                                                                /*   |                                                */
+#define  OS_TASK_STATE_BIT_PEND              (OS_STATE)(0x02u)  /*   | /-----  PEND      bit                          */
+                                                                /*   | |                                              */
+#define  OS_TASK_STATE_BIT_SUSPENDED         (OS_STATE)(0x04u)  /*   | | /---  Delayed/Timeout bit                    */
+                                                                /*   | | |                                            */
+                                                                /*   V V V                                            */
+
+#define  OS_TASK_STATE_RDY                    (OS_STATE)(  0u)  /*   0 0 0     Ready                                  */
+#define  OS_TASK_STATE_DLY                    (OS_STATE)(  1u)  /*   0 0 1     Delayed or Timeout                     */
+#define  OS_TASK_STATE_PEND                   (OS_STATE)(  2u)  /*   0 1 0     Pend                                   */
+#define  OS_TASK_STATE_PEND_TIMEOUT           (OS_STATE)(  3u)  /*   0 1 1     Pend + Timeout                         */
+#define  OS_TASK_STATE_SUSPENDED              (OS_STATE)(  4u)  /*   1 0 0     Suspended                              */
+#define  OS_TASK_STATE_DLY_SUSPENDED          (OS_STATE)(  5u)  /*   1 0 1     Suspended + Delayed or Timeout         */
+#define  OS_TASK_STATE_PEND_SUSPENDED         (OS_STATE)(  6u)  /*   1 1 0     Suspended + Pend                       */
+#define  OS_TASK_STATE_PEND_TIMEOUT_SUSPENDED (OS_STATE)(  7u)  /*   1 1 1     Suspended + Pend + Timeout             */
+#define  OS_TASK_STATE_DEL                    (OS_STATE)(255u)
+
+	
 typedef  struct  os_tcb          OS_TCB; 
 typedef  struct  os_rdy_list     OS_RDY_LIST;
 typedef  void (*OS_TASK_PTR)(void *p_arg); 
@@ -82,12 +107,20 @@ struct os_tcb
 	/* 时间片相关字段 */
 	OS_TICK       TimeQuanta;     //任务需要多少时间片
 	OS_TICK       TimeQuantaCtr;  //任务还剩多少时间片
+	
+	OS_STATE      TaskState;      //任务的状态
+	
+#if OS_CFG_TASK_SUSPEND_EN   > 0u
+	/* 任务挂起函数 OSTaskSuspen()计数器 */
+	OS_NESTING_CTR     SuspenCtr;
+#endif
 };
 
 OS_EXT  OS_PRIO  OSPrioCur;       /* 当前运行任务优先级 */
 OS_EXT  OS_PRIO  OSPrioHighRdy;   /* 就绪任务中的最高优先级 */ 
 
-
+/* 调度器锁嵌套计数器 */
+OS_EXT            OS_NESTING_CTR         OSSchedLockNestingCtr;
 
 struct os_rdy_list 
 {                                   
