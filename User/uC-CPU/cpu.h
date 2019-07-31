@@ -1,5 +1,5 @@
-#ifndef _CPU_H_ 
-#define _CPU_H_
+#ifndef CPU_H 
+#define CPU_H
 
 
 /*

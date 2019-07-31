@@ -59,18 +59,18 @@ struct os_tcb
 		/*  任务堆栈的大小 */
     CPU_STK_SIZE    StkSize;      
 		
-	 /* 任务延时周期个数 */
-		OS_TICK   TaskDelayTicks;  
+ /* 任务延时周期个数 */
+	OS_TICK   TaskDelayTicks;  
 
-		/* 任务优先级 */
-	  OS_PRIO   prio;
-	 
-	  /* 就绪列表双向链表后项指针 */
-	  OS_TCB    *NextPtr; 
+	/* 任务优先级 */
+  OS_PRIO   prio;
+ 
+  /* 就绪列表双向链表后项指针 */
+  OS_TCB    *NextPtr; 
+
+ /* 就绪列表双向链表前项指针 */
+	OS_TCB    *PrevPtr;
 	
-	 /* 就绪列表双向链表前项指针 */
-		OS_TCB    *PrevPtr;
-		
 	/* 时基列表相关字段 */
 	OS_TCB         *TickNextPtr;   //指向链表的下一个TCB节点
 	OS_TCB         *TickPrevPtr;   //指向链表的上一个TCB节点
@@ -78,6 +78,10 @@ struct os_tcb
 	
 	OS_TICK       TickCtrMatch;   
 	OS_TICK       TickRemain;      //设置任务等待周期
+	
+	/* 时间片相关字段 */
+	OS_TICK       TimeQuanta;     //任务需要多少时间片
+	OS_TICK       TimeQuantaCtr;  //任务还剩多少时间片
 };
 
 OS_EXT  OS_PRIO  OSPrioCur;       /* 当前运行任务优先级 */
@@ -87,9 +91,9 @@ OS_EXT  OS_PRIO  OSPrioHighRdy;   /* 就绪任务中的最高优先级 */
 
 struct os_rdy_list 
 {                                   
-    OS_TCB      *HeadPtr; 
-    OS_TCB      *TailPtr; 
-		OS_OBJ_QTY  NbrEnries; /* NbrEntries 表示 OSRdyList[]同一个索引下有多少个任务 */
+	OS_TCB      *HeadPtr; 
+	OS_TCB      *TailPtr; 
+	OS_OBJ_QTY  NbrEnries; /* NbrEntries 表示 OSRdyList[]同一个索引下有多少个任务 */
 }; 
 
 OS_EXT OS_RDY_LIST  OSRdyList[OS_CFG_PRIO_MAX];   /* 任务就绪列表 */
@@ -338,6 +342,10 @@ void  OS_TickListInsert(OS_TCB *p_tcb,OS_TICK time);
 void  OS_TickListRemove(OS_TCB  *p_tcb);
 void  OS_TickListUpdate(void);
 
+#if OS_CFG_SCHED_ROUND_ROBIN_EN > 0u
+void OS_ShcedRoundRobin(OS_RDY_LIST *p_rdy_list);
+#endif
+										
 
 #endif	
 															 

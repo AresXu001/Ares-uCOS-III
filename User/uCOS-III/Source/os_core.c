@@ -183,9 +183,10 @@ void OS_IdleTaskInit(OS_ERR *p_err)
 	OSTaskCreate ((OS_TCB      *)  &OSIdleTaskTCB, 
 	              (OS_TASK_PTR  )  OS_IdleTask, 
 	              (void        *)  0,
-								(OS_PRIO      )  (OS_CFG_PRIO_MAX - 1u), //加上优先级参数初始化
+					  (OS_PRIO      )  (OS_CFG_PRIO_MAX - 1u), //加上优先级参数初始化
 	              (CPU_STK     *)  OSCfg_IdleTaskStkBasePtr,
 	              (CPU_STK_SIZE )  OSCfg_IdleTaskStkSize,
+					  (OS_TICK      )  0,
 	              (OS_ERR      *)  p_err);
 }
 
@@ -389,4 +390,64 @@ void OS_TaskRdy(OS_TCB *p_tcb)
 	/* 插入就绪列表 */
 	OS_RdyListInsert(p_tcb);
 }
+
+
+#if OS_CFG_SCHED_ROUND_ROBIN_EN > 0u
+void OS_ShcedRoundRobin(OS_RDY_LIST *p_rdy_list)
+{
+	OS_TCB *p_tcb;
+	CPU_SR_ALLOC();
+	
+	/* 进入临界区 */
+	CPU_CRITICAL_ENTER();
+	
+	p_tcb = p_rdy_list->HeadPtr;
+	
+	/* 如果TCB节点为空，退出*/
+	if(p_tcb == (OS_TCB *)0)
+	{
+		CPU_CRITICAL_EXIT();
+		return;
+	}
+	/* 如果是空闲任务，也退出 */
+	if(p_tcb == &OSIdleTaskTCB)
+	{
+		CPU_CRITICAL_EXIT();
+		return;
+	}
+	
+	/* 时间片自减 */
+	if(p_tcb->TimeQuantaCtr > (OS_TICK)0)
+	{
+		p_tcb->TimeQuantaCtr--;
+	}
+	
+	/* 如果时间没有用完，退出 */
+	if(p_tcb->TimeQuantaCtr > (OS_TICK)0)
+	{
+		CPU_CRITICAL_EXIT();
+		return;
+	}
+	
+	/* 如果当前优先级只有一个任务 退出 */
+	if(p_rdy_list->NbrEnries < (OS_OBJ_QTY)2)
+	{
+		CPU_CRITICAL_EXIT();
+		return;
+	}
+	/* 时间片耗完，将任务放到链表的最后一个节点 */
+	OS_RdyListMoveHeadToTail(p_rdy_list);
+	
+	/* 重新获取任务节点 */
+	p_tcb = p_rdy_list->HeadPtr;
+	
+	/* 重载默认的时间片计数值 */
+	p_tcb->TimeQuantaCtr = p_tcb->TimeQuanta;
+	
+	/* 退出临界段 */
+	CPU_CRITICAL_EXIT();
+}
+#endif
+
+
 

@@ -35,6 +35,10 @@ void OSTimeTick(void)
 	
 	/* 更新时基列表 */
 	OS_TickListUpdate();
+
+#if OS_CFG_SCHED_ROUND_ROBIN_EN > 0u
+	OS_ShcedRoundRobin(&OSRdyList[OSPrioCur]);
+#endif
 	/* 退出临界区 */
 	OS_CRITICAL_ENTER();
 	

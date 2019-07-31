@@ -3,7 +3,7 @@
 
 /* 支持最大的优先级 */ 
 #define OS_CFG_PRIO_MAX                32u 
-
+#define OS_CFG_SCHED_ROUND_ROBIN_EN    1u
 
 #endif
 

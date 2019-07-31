@@ -20,6 +20,7 @@ void OSTaskCreate(OS_TCB       *p_tcb,        // 任务控制块
 									OS_PRIO      prio,         // 任务优先级
 									CPU_STK      *p_stk_base,  //任务堆栈基地址
 									CPU_STK_SIZE stk_size,     //任务堆栈大小
+									OS_TICK     time_quata,    //任务时间片
 									OS_ERR       *p_err)       //任务故障识别码
 {
 	CPU_STK   *p_sp;
@@ -36,6 +37,13 @@ void OSTaskCreate(OS_TCB       *p_tcb,        // 任务控制块
 	p_tcb->prio = prio;        //设置任务优先级
 	p_tcb->StkPtr   = p_sp;    //保存任务堆栈栈顶地址
 	p_tcb->StkSize  = stk_size;//保存任务堆栈大小
+	
+	/* 时间片相关初始化 */
+	p_tcb->TimeQuanta = time_quata;
+
+#if OS_CFG_SCHED_ROUND_ROBIN_EN > 0u
+	p_tcb->TimeQuantaCtr = time_quata;
+#endif
 	
 	 /* 进入临界段 */ 
 	OS_CRITICAL_ENTER(); 
