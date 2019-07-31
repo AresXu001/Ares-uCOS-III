@@ -25,7 +25,13 @@ Section Cross References
     os_task.o(i.OSTaskCreate) refers to cpu_a.o(.text) for CPU_SR_Save
     os_task.o(i.OSTaskCreate) refers to os_prio.o(i.OS_PrioInsert) for OS_PrioInsert
     os_task.o(i.OSTaskCreate) refers to os_core.o(i.OS_RdyListInsertTail) for OS_RdyListInsertTail
+    os_task.o(i.OSTaskDel) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_task.o(i.OSTaskDel) refers to os_core.o(i.OS_RdyListRemove) for OS_RdyListRemove
+    os_task.o(i.OSTaskDel) refers to os_tick.o(i.OS_TickListRemove) for OS_TickListRemove
+    os_task.o(i.OSTaskDel) refers to os_task.o(i.OS_TaskInitTCB) for OS_TaskInitTCB
+    os_task.o(i.OSTaskDel) refers to os_core.o(i.OSSched) for OSSched
     os_task.o(i.OSTaskDel) refers to os_var.o(.bss) for OSIdleTaskTCB
+    os_task.o(i.OSTaskDel) refers to os_var.o(.data) for OSTCBCurPtr
     os_task.o(i.OSTaskResume) refers to cpu_a.o(.text) for CPU_SR_Restore
     os_task.o(i.OSTaskResume) refers to os_core.o(i.OS_TaskRdy) for OS_TaskRdy
     os_task.o(i.OSTaskResume) refers to os_core.o(i.OSSched) for OSSched
@@ -222,7 +228,7 @@ Removing Unused input sections from the image.
     Removing app.o(.revsh_text), (4 bytes).
     Removing app.o(.rrx_text), (6 bytes).
     Removing app.o(i.delay), (12 bytes).
-    Removing os_task.o(i.OSTaskDel), (24 bytes).
+    Removing os_task.o(i.OSTaskDel), (192 bytes).
     Removing os_task.o(i.OSTaskResume), (242 bytes).
     Removing os_task.o(i.OS_TaskSuspen), (280 bytes).
     Removing os_prio.o(i.OS_PrioInit), (24 bytes).
@@ -236,7 +242,7 @@ Removing Unused input sections from the image.
     Removing system_armcm3.o(.rrx_text), (6 bytes).
     Removing system_armcm3.o(i.SystemCoreClockUpdate), (16 bytes).
 
-17 unused section(s) (total 692 bytes) removed from the image.
+17 unused section(s) (total 860 bytes) removed from the image.
 
 ==============================================================================
 

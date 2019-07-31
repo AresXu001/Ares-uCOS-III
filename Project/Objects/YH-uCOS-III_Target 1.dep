@@ -19,7 +19,7 @@ I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\mpu_armv7
 I (D:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include\system_ARMCM3.h)(0x5BBD6B7A)
 F (..\User\uCOS-III\Source\os.h)(0x5D414DE4)()
 F (..\User\uCOS-III\Source\os_cfg.h)(0x5D415015)()
-F (..\User\uCOS-III\Source\os_task.c)(0x5D415013)(--c99 -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\User -I ..\User\uC-CPU -I ..\User\uC-LIB -I ..\User\uCOS-III\Ports -I ..\User\uCOS-III\Source -I ..\User-I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="527" -D_RTE_ -DARMCM3-o .\objects\os_task.o --omf_browse .\objects\os_task.crf --depend .\objects\os_task.d)
+F (..\User\uCOS-III\Source\os_task.c)(0x5D415570)(--c99 -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\User -I ..\User\uC-CPU -I ..\User\uC-LIB -I ..\User\uCOS-III\Ports -I ..\User\uCOS-III\Source -I ..\User-I.\RTE\_Target_1-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-ID:\ProgramFiles\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="527" -D_RTE_ -DARMCM3-o .\objects\os_task.o --omf_browse .\objects\os_task.crf --depend .\objects\os_task.d)
 I (..\User\uCOS-III\Source\os.h)(0x5D414DE4)
 I (..\User\uCOS-III\Source\os_cfg.h)(0x5D415015)
 I (..\User\uC-CPU\cpu.h)(0x5D413056)

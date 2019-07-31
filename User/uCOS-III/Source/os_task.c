@@ -278,6 +278,77 @@ void OSTaskDel(OS_TCB *p_tcb,
 		*p_err = OS_ERR_TASK_DEL_IDLE;
 		return;
 	}
+	
+	if(p_tcb == (OS_TCB *)0)
+	{
+		CPU_CRITICAL_ENTER();
+		p_tcb = OSTCBCurPtr;
+		CPU_CRITICAL_EXIT();
+	}
+	
+	OS_CRITICAL_ENTER();
+	
+	/* 根据任务的状态来决定删除动作 */
+	switch(p_tcb->TaskState)
+	{
+		case OS_TASK_STATE_RDY:
+			OS_RdyListRemove(p_tcb);
+			break;
+		case OS_TASK_STATE_SUSPENDED:
+			break;
+		
+		/* 任务只是在延时，并没有在任何等待列表中 */
+		case OS_TASK_STATE_DLY:
+		case OS_TASK_STATE_DLY_SUSPENDED:
+			OS_TickListRemove(p_tcb);
+			break;
+		
+		case OS_TASK_STATE_PEND:
+		case OS_TASK_STATE_PEND_SUSPENDED:
+		case OS_TASK_STATE_PEND_TIMEOUT:
+		case OS_TASK_STATE_PEND_TIMEOUT_SUSPENDED:
+			OS_TickListRemove(p_tcb);
+#if 0 /* 目前我们还没有实现等待列表，暂时先把这部分代码注释 */		
+             /* 看看在等待什么 */
+			 switch (p_tcb->PendOn) 
+			 {                       
+                 case OS_TASK_PEND_ON_NOTHING:
+				 /* 任务信号量和队列没有等待队列，直接退出 */
+                 case OS_TASK_PEND_ON_TASK_Q:               
+                 case OS_TASK_PEND_ON_TASK_SEM:
+                      break;
+
+                 /* 从等待列表移除 */
+				 case OS_TASK_PEND_ON_FLAG:                 
+                 case OS_TASK_PEND_ON_MULTI:
+                 case OS_TASK_PEND_ON_MUTEX:
+                 case OS_TASK_PEND_ON_Q:
+                 case OS_TASK_PEND_ON_SEM:
+                      OS_PendListRemove(p_tcb);
+                      break;
+
+                 default:
+                      break;
+             }
+             break;
+#endif 
+				 
+	    default:
+			 OS_CRITICAL_EXIT();
+			 *p_err = OS_ERR_STATE_INVALID;
+			 return;		
+	}
+	
+	/* 初始化TCB为默认值 */
+	OS_TaskInitTCB(p_tcb);
+	
+	/* 修改任务的状态为删除态，即处于休眠 */
+	p_tcb->TaskState = (OS_STATE)OS_TASK_STATE_DEL;
+	
+	OS_CRITICAL_EXIT_NO_SCHED();
+	/* 任务切换，寻找最高优先级的任务 */
+	OSSched();
 }
+
 
 #endif
